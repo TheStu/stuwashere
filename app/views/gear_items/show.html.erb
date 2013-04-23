@@ -1,0 +1,44 @@
+<% provide(:title, "#{@gear_item.name}") %>
+<% provide(:desc, "Information on the #{@gear_item.name}, including pictures, reviews and trip reports") %>
+
+<div class="row">
+  <div class="span7">
+    <h1 class="gear-item-show-h1"><%= @gear_item.name %></h1>
+    <div class="well">
+      <%= @gear_item.intro %>
+    </div>
+    <h3>Related Posts</h3>
+    <ul class="trip-related-posts">
+      <% @gear_item.posts.each do |post| %>
+        <li><%= link_to post.title, post_path(post) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="span5">
+    <div class="show-outer-img">
+      <%= link_to image_tag(@front_pic.flickr_medium_url, alt: @front_pic.name, class: "show-inner-img"), picture_path(@front_pic) %>
+    </div>
+    <table class="thumbnail-table">
+      <% @gear_item.pictures.in_groups_of(4).each do |group| %>
+        <tr>
+          <% group.each do |pic| %>
+            <td>
+              <% if pic != nil %>
+                <div class="outer-img">
+                  <%= link_to image_tag(pic.flickr_small_url, alt: pic.name, :'data-toggle' => "tooltip", title: pic.name, class: 'inner-img tooltip-me'), picture_path(pic) %>
+                </div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+<%= link_to 'Edit', edit_gear_item_path(@gear_item) %>
+
+<script type="text/javascript">
+  $('.tooltip-me').tooltip()
+</script>

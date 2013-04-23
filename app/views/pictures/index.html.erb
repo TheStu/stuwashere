@@ -1,0 +1,47 @@
+<% provide(:title, 'Pictures Index') %>
+<% provide(:desc, 'Sort, filter and find pictures') %>
+
+<h1>Pictures</h1>
+
+<%= form_tag pictures_path, :method => 'get', id: 'filter-pictures' do %>
+
+  <%= select_tag( :sort_by,
+                  options_for_select([['Gear', 'gear'],
+                                      ['Trips', 'trip'],
+                                      ['Date', 'date'],
+                                      ],
+                  :selected => params[:sort_by]),
+                  :prompt => "Sort By",
+                  :onchange => ("$('#filter-pictures').submit()"),
+                  class: 'index-sort-by-form float-right')
+  %>
+<% end %>
+
+<% if params[:sort_by].present? && params[:sort_by] == 'gear' %>
+
+  <% @pictures.each do |gear, pictures| %>
+    <h2><%= gear == nil ? 'Uncategorized' : GearItem.find(gear).name %></h2>
+    <%= render partial: 'picture', collection: pictures %>
+  <% end %>
+
+<% elsif params[:sort_by].present? && params[:sort_by] == 'trip' %>
+
+  <% @pictures.each do |trip, pictures| %>
+    <h2><%= trip == nil ? 'Uncategorized' : Trip.find(trip).name %></h2>
+    <%= render partial: 'picture', collection: pictures %>
+  <% end %>
+
+<% elsif params[:sort_by].present? && params[:sort_by] == 'date' %>
+
+  <h2>Pictures by Date</h2>
+  <%= render partial: 'picture', collection: @pictures %>
+
+<% else %>
+
+  <%= render partial: 'picture', collection: @pictures %>
+
+<% end %>
+
+<script type="text/javascript">
+  $('.tooltip-me').tooltip()
+</script>

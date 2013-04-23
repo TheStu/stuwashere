@@ -1,0 +1,41 @@
+<%= form_for(@picture) do |f| %>
+  <% if @picture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
+
+      <ul>
+      <% @picture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :post_id %><br />
+    <%= f.select :post_id, Post.all.map {|post| [post.title, post.id]}, { :include_blank => true } %>
+  </div>
+  <div class="field">
+    <%= f.label :trip_id %><br />
+    <%= f.select :trip_id, Trip.all.map {|trip| [trip.name, trip.id]}, { :include_blank => true } %>
+  </div>
+  <div class="field">
+    <%= f.label :gear_item_id %><br />
+    <%= f.select :gear_item_id, GearItem.all.map {|gear_item| [gear_item.name, gear_item.id]}, { :include_blank => true } %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :flickr_url %><br />
+    <%= f.text_field :flickr_url %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

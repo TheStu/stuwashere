@@ -1,0 +1,5 @@
+<div class="pic-result">
+  <div class="outer-img">
+    <%= link_to image_tag(picture.flickr_medium_url, alt: picture.name, :'data-toggle' => "tooltip", title: picture.name, class: 'inner-img tooltip-me'), picture_path(picture) %>
+  </div>
+</div>

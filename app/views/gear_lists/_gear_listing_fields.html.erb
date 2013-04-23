@@ -1,0 +1,33 @@
+<div class="field-block">
+  <div class="well">
+    <div>
+      <%= f.select :gear_item_id, GearItem.all.map {|item| [item.name, item.id]}, { :include_blank => true }, class: "float-left clear-left gear-item-select" %>
+      <%= f.label :gear_item_id, class: 'beside-label' %>
+    </div>
+    <div>
+      <%= f.select  :group_type,
+                    options_for_select(['Worn / Carried',
+                                        'Other Clothing',
+                                        'Carrying',
+                                        'Sleeping',
+                                        'Shelter',
+                                        'Water',
+                                        'Cooking',
+                                        'Toiletries',
+                                        'Camera Equipment',
+                                        'Lighting',
+                                        'Medical',
+                                        'Misc'
+                                        ], selected: f.object.group_type),
+                    { :include_blank => true },
+                    class: "float-left clear-left group-type-select" %>
+      <%= f.label :group_type, class: 'beside-label' %>
+    </div>
+    <div>
+      <%= f.text_field :quantity, class: "float-left clear-left quantity-input" %>
+      <%= f.label :quantity, class: 'beside-label' %>
+    </div>
+    <%= f.hidden_field :_destroy %>
+    <p class="remove-gear-item"><%= link_to_remove_fields "remove", f %></p>
+  </div>
+</div>

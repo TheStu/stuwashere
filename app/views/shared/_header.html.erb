@@ -1,0 +1,65 @@
+<div class="navbar navbar-inverse navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to image_tag('logo.png'), root_path, class: "brand" %>
+      <%= form_tag results_path, method: 'get', class: 'navbar-search pull-left' do %>
+        <%= text_field_tag :q, params[:q], class: 'search-query', placeholder: 'Search' %>
+      <% end %>
+      <ul class="nav pull-left">
+        <li class="dropdown">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             href="#">
+              <i class="icon-globe icon-white"></i>
+              Trips
+              <b class="caret"></b>
+            </a>
+          <ul class="dropdown-menu">
+            <%= Trip.find_each do |trip| %>
+              <li><%= link_to trip.name, trip_path(trip) %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             href="#">
+              <i class="icon-tags icon-white"></i>
+              Tags
+              <b class="caret"></b>
+            </a>
+          <ul class="dropdown-menu">
+            <%= Tag.find_each do |tag| %>
+              <li><%= link_to "#{tag.name} (#{tag.tag_count})", tag_path(tag) %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li><%= link_to '<i class="icon-picture icon-white"></i> Pictures'.html_safe, pictures_path %></li>
+      </ul>
+      <% if user_signed_in? %>
+        <ul class="nav pull-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                ME
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "New Trip", new_trip_path %></li>
+              <li><%= link_to "New Gear Item", new_gear_item_path %></li>
+              <li><%= link_to "New Gear List", new_gear_list_path %></li>
+              <li><%= link_to "New Tag", new_tag_path %></li>
+              <li><%= link_to "New Picture", new_picture_path %></li>
+              <li><%= link_to "New Post", new_post_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: "delete" %></li>
+            </ul>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+

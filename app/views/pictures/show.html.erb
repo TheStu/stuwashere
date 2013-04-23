@@ -1,0 +1,65 @@
+<% provide(:title, @picture.name) %>
+<% provide(:desc, @picture.description) %>
+
+<h1 class="picture-h1"><%= @picture.name %></h1>
+
+<div class="well">
+  <p><%= @picture.description %></p>
+  <% if @picture.gear_item_id.present? || @picture.trip_id.present? || @picture.post_id.present? %>
+    <h4>This Picture Belongs To:</h4>
+    <ul>
+      <% if @picture.trip_id.present? %>
+        <li>
+          <%= link_to "#{@picture.trip.name} Trip", trip_path(@picture.trip) %>
+        </li>
+      <% end %>
+      <% if @picture.gear_item_id.present? %>
+        <li>
+          <%= link_to @picture.gear_item.name, gear_item_path(@picture.gear_item) %>
+        </li>
+      <% end %>
+      <% if @picture.post_id.present? %>
+        <li>
+          <%= link_to @picture.post.title, post_path(@picture.post) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<table class="img-show-table">
+  <%
+    @next = next_picture(@picture)
+    @previous = previous_picture(@picture)
+   %>
+  <tr>
+    <td>
+      <% if @previous != nil %>
+        <%= link_to image_tag('chevron-left.png', alt: 'Previous Picture', :'data-toggle' => "tooltip", title: 'Previous Picture', class: 'tooltip-me'), picture_path(@previous), class: 'pic-chevron' %>
+      <% else %>
+        <%= image_tag 'chevron-left.png', class: 'opacity-me' %>
+      <% end %>
+    </td>
+
+    <td>
+      <div class="img-show-outer">
+        <%= image_tag @picture.flickr_large_url, alt: @picture.name %>
+      </div>
+    </td>
+
+    <td>
+      <% if @next != nil %>
+        <%= link_to image_tag('chevron-right.png', alt: 'Next Picture', :'data-toggle' => "tooltip", title: 'Next Picture', class: 'tooltip-me'), picture_path(@next), class: 'pic-chevron' %>
+      <% else %>
+        <%= image_tag 'chevron-right.png', class: 'opacity-me' %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<br>
+<%= link_to 'Edit', edit_picture_path(@picture) %>
+
+<script type="text/javascript">
+  $('.tooltip-me').tooltip()
+</script>

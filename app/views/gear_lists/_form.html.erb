@@ -1,0 +1,43 @@
+<%= form_for(@gear_list) do |f| %>
+  <% if @gear_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gear_list.errors.count, "error") %> prohibited this gear_list from being saved:</h2>
+
+      <ul>
+      <% @gear_list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="span8">
+      <div class="field">
+        <%= f.label :trip_id %><br />
+        <%= f.select :trip_id, Trip.all.map {|trip| [trip.name, trip.id]} %>
+      </div>
+      <div class="field">
+        <%= f.label :intro %><br />
+        <%= f.text_area :intro %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="field">
+        <h3>Gear List Items</h3>
+        <%= f.fields_for :gear_listings do |listing| %>
+          <%= render 'gear_listing_fields', :f => listing %>
+        <% end %>
+        <button class="btn btn-small">
+          <%= link_to_add_fields "Add Gear Listing", f, :gear_listings %>
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $('#gear_list_intro').wysihtml5();
+</script>

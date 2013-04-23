@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gear_list_id: 1
+  name: MyString
+  weight: 1
+  group_type: MyString
+  post_id: 1
+
+two:
+  gear_list_id: 1
+  name: MyString
+  weight: 1
+  group_type: MyString
+  post_id: 1

@@ -1,0 +1,460 @@
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                VARIABLES / MIXIN CLASSES              //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+$gg: #00b945;
+$oo: #FF8500;
+$pp: #D9005B;
+
+.fonted {
+  font-family: 'Patrick Hand SC', cursive;
+}
+
+.float-right {
+  float: right;
+}
+
+.clear-right {
+  clear: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.clear-left {
+  clear: left;
+}
+
+.pink-me {
+  color: $pp;
+}
+
+.bolded {
+  font-weight: bold;
+}
+
+.bump {
+  width: 100%;
+  height: 1px;
+  clear: both;
+}
+
+label {
+  font-weight: bold;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  vertical-align: baseline;
+}
+
+.outer-img {
+  padding: 5px;
+  border: 1px solid #ccc;
+  @include border-radius(4px);
+  .inner-img {
+    @include border-radius(4px);
+  }
+}
+
+.show-outer-img {
+  @extend .outer-img;
+  float: right;
+  margin-top: 10px;
+  .show-inner-img {
+    @extend .inner-img;
+    max-width: 100%;
+  }
+}
+
+.select-outer-img {
+  @extend .outer-img;
+  display: inline-block;
+  margin: 0 5px 10px 15px;
+  label {
+    margin-bottom: 0;
+  }
+  .select-inner-img {
+    @extend .inner-img;
+  }
+}
+
+.img-show-outer {
+  @extend .outer-img;
+  img {
+    @extend .inner-img;
+    max-height: 800px;
+
+  }
+}
+
+.well {
+  font-size: 16px;
+  line-height: 24px;
+  li {
+    line-height: 24px;
+  }
+}
+
+.beside-label {
+  line-height: 30px;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
+
+.thumbnail-table {
+  td {
+    padding: 10px 10px 0 0;
+  }
+  td:last-child {
+    padding-right: 0;
+  }
+}
+
+.opacity-me {
+  opacity: .3;
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                    APPLICATION WIDE                   //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+html, body {
+  height: 100%; // for footer
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -59px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @extend .fonted;
+}
+
+h1 {
+  font-size: 40px;
+  color: #FF8500;
+}
+
+input[type="submit"] {
+  @extend .btn;
+}
+
+.btn {
+  @extend .btn-success, .fonted;
+  font-size: 16px;
+}
+
+#error_explanation {
+  h2 {
+    font-size: 22px;
+  }
+  ul li {
+    color: red;
+  }
+}
+
+button a {
+  color: white;
+  &:hover {
+    color: white;
+  }
+}
+
+.field_with_errors {
+  display: inline-block;
+  label {
+    color: red;
+  }
+}
+
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+  border-color: rgba($gg, 0.8);
+  @include box-shadow(#{0 0 8px rgba($gg, 0.6), 0 0 0 rgba($gg, 0.6) inset});
+}
+
+#trip_name, #trip_intro, #gear_item_name, #gear_item_intro, #gear_list_name, #gear_list_intro, #picture_flickr_url, #picture_description, #picture_print_url, #post_title, #post_content {
+  width: 600px;
+}
+
+.field label {
+  display: inline-block;
+}
+
+.field input[type="checkbox"] {
+  margin-top: 0;
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          HEADER                       //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.navbar-static-top {
+  @extend .fonted;
+  .brand {
+    font-size: 30px;
+    padding: 5px 20px 5px;
+  }
+  ul {
+    font-size: 20px;
+  }
+  .nav > li > a {
+    padding: 15px 15px 14px;
+  }
+  .navbar-search {
+    margin-top: 10px;
+  }
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          SIDEBAR                      //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.sidebar {
+  .sidebar-section {
+    @extend .well;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    padding: 0 10px 10px 10px;
+    margin-top: 10px;
+    h3 {
+      line-height: 30px;
+    }
+  }
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          TRIP                         //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.trip-show-h1 {
+  display: inline-block;
+}
+
+.trip-show-h1:before {
+  content: 'trip :: ';
+  color: $pp;
+}
+
+.trip-related-posts {
+  li {
+    font-size: 18px;
+    line-height: 23px;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.trip-dates {
+  text-align: center;
+  img {
+    padding: 0 10px;
+    vertical-align: text-top;
+  }
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          GEAR                         //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.gear-item-show-h1 {
+  display: inline-block;
+}
+
+.gear-item-show-h1:before {
+  content: 'gear :: ';
+  color: $pp;
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                        GEARLIST                       //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.gear-list-table {
+  font-size: 17px;
+  line-height: 25px;
+  width: 100%;
+  tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    td {
+      padding: 5px 0;
+    }
+    td:last-child {
+      text-align: right;
+    }
+  }
+  tr:last-child {
+    border-bottom: 0;
+  }
+}
+
+.group-type-select, .gear-item-select {
+  width: 150px;
+}
+
+.quantity-input {
+  width: 30px;
+}
+
+.remove-gear-item {
+  line-height: 30px;
+  margin-top: 10px;
+  a {
+    color: white;
+    @extend .btn, .btn-mini;
+    margin-left: 5px;
+  }
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          POST                         //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.field-block {
+  @extend .field;
+  .remove-pic {
+    line-height: 30px;
+    a {
+      color: white;
+      @extend .btn, .btn-mini;
+      margin-left: 5px;
+    }
+  }
+}
+
+.post-meta-well {
+  @extend .well;
+  padding: 5px;
+  p {
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #888;
+  }
+}
+
+.post-content {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.post-h1:before {
+  content: 'post :: ';
+  color: $pp;
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          PICTURE                      //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.picture-h1:before {
+  content: 'picture :: ';
+  color: $pp;
+}
+
+.pic-chevron {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.img-show-table {
+  margin: auto;
+  td:last-child {
+    padding-left: 10px;
+  }
+  td:first-child {
+    padding-right: 10px;
+  }
+}
+
+.pic-result {
+  display: inline-block;
+  margin: 0 7px 10px 0;
+  img {
+    height: 120px;
+  }
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          RESULTS                      //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.results-h1:before {
+  content: 'search results :: ';
+  color: $pp;
+}
+
+.result-name {
+  line-height: 30px;
+  margin: 5px 0;
+}
+
+.result-content {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          TAGS                         //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.tag-h1:before {
+  content: 'tag :: ';
+  color: $pp;
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          FOOTER                       //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.navbar-fixed-bottom {
+  position: static;
+  margin-top: 0;
+  .navbar-inner {
+    padding: 5px 20px;
+    .btn-navbar {
+      margin-top: 5px;
+    }
+  }
+  .nav > li > a {
+    margin: 4px 0 4px 10px;
+    @extend .fonted;
+    font-size: 20px;
+  }
+}
+
+#push {
+  height: 100px;
+}
+

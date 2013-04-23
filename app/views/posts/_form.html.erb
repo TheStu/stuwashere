@@ -1,0 +1,58 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="span8">
+      <div class="field">
+        <%= f.label :trip_id %><br />
+        <%= f.select :trip_id, Trip.all.map {|trip| [trip.name, trip.id]}, { :include_blank => true } %>
+      </div>
+      <div class="field">
+        <%= f.label :gear_item_id %><br />
+        <%= f.select :gear_item_id, GearItem.all.map {|item| [item.name, item.id]}, { :include_blank => true } %>
+      </div>
+      <div class="field">
+        <%= f.label :title %><br />
+        <%= f.text_field :title %>
+      </div>
+      <div class="field">
+        <%= f.label :content %><br />
+        <%= f.text_area :content %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="field">
+        <h3>Tags</h3>
+        <%= hidden_field_tag "post[tag_ids][]", nil %>
+        <% Tag.find_each do |tag| %>
+          <%= check_box_tag "post[tag_ids][]", tag.id, @post.tag_ids.include?(tag.id), id: dom_id(tag) %>
+          <%= label_tag dom_id(tag), tag.name %><br>
+        <% end %>
+      </div>
+      <div class="field">
+        <h3>Pictures (Flickr URLs)</h3>
+        <%= f.fields_for :pictures do |pic| %>
+          <%= render 'picture_fields', :f => pic %>
+        <% end %>
+        <p><%= link_to_add_fields "Add Picture", f, :pictures %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $('#post_content').wysihtml5();
+</script>

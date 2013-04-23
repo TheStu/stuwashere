@@ -1,0 +1,53 @@
+<% provide(:title, "#{@trip.name}") %>
+<% provide(:desc, "Pictures, gear lists and posts from XXX days on the #{@trip.name}") %>
+
+<div class="row">
+  <div class="span7">
+    <h1 class="trip-show-h1"><%= @trip.name %></h1>
+    <div class="well">
+      <p class="trip-dates"><strong>
+        <%= pretty_date(@trip.start_date) %>
+        <%= image_tag 'arrow.png' %>
+        <%= pretty_date(@trip.end_date) %>
+      </strong></p>
+      <p><%= @trip.intro %></p>
+      <strong>
+        <%= link_to "#{@trip.name} Gear List", gear_list_path(@trip.gear_list) %>
+      </strong>
+    </div>
+    <h2>Related Posts</h2>
+    <ul class="trip-related-posts">
+      <% @trip.posts.each do |post| %>
+        <li><%= link_to post.title, post_path(post) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="span5">
+    <div class="show-outer-img">
+      <%= link_to image_tag(@front_pic.flickr_medium_url, alt: @front_pic.name, class: 'show-inner-img'), picture_path(@front_pic) %>
+    </div>
+    <table class="thumbnail-table">
+      <% @trip.pictures.in_groups_of(4).each do |group| %>
+        <tr>
+          <% group.each do |pic| %>
+            <td>
+              <% if pic != nil %>
+                <div class="outer-img">
+                  <%= link_to image_tag(pic.flickr_small_url, alt: pic.name, :'data-toggle' => "tooltip", title: pic.name, class: 'inner-img tooltip-me'), picture_path(pic) %>
+                </div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+
+<%= link_to 'Edit', edit_trip_path(@trip) %>
+
+<script type="text/javascript">
+  $('.tooltip-me').tooltip()
+</script>

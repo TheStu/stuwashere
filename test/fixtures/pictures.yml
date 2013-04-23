@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  post_id: 1
+  trip_id: 1
+  gear_item_id: 1
+  flickr_url: MyString
+  description: MyString
+  print_url: MyString
+
+two:
+  post_id: 1
+  trip_id: 1
+  gear_item_id: 1
+  flickr_url: MyString
+  description: MyString
+  print_url: MyString

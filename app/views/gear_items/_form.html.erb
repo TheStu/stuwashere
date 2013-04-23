@@ -1,0 +1,43 @@
+<%= form_for(@gear_item) do |f| %>
+  <% if @gear_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gear_item.errors.count, "error") %> prohibited this gear_item from being saved:</h2>
+
+      <ul>
+      <% @gear_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="span8">
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :weight, "weight (grams)" %><br />
+        <%= f.number_field :weight %>
+      </div>
+      <div class="field">
+        <%= f.label :intro %><br />
+        <%= f.text_area :intro %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
+    <div class="span4">
+      <h3>Front Picture</h3>
+      <div class="field">
+        <% Picture.find_each do |picture| %>
+          <div class="select-outer-img">
+            <%= f.label :front_picture_id, image_tag(picture.flickr_small_url, class: 'select-inner-img'), :for => "gear_item_front_picture_id_#{picture.id}" %>
+          </div>
+          <%= f.radio_button :front_picture_id, picture.id %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<h1>Listing gear_items</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Weight</th>
+    <th>Group type</th>
+    <th>Post</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gear_items.each do |gear_item| %>
+  <tr>
+    <td><%= gear_item.name %></td>
+    <td><%= gear_item.weight %></td>
+    <td><%= gear_item.group_type %></td>
+    <td><%= gear_item.post_id %></td>
+    <td><%= link_to 'Show', gear_item %></td>
+    <td><%= link_to 'Edit', edit_gear_item_path(gear_item) %></td>
+    <td><%= link_to 'Destroy', gear_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gear item', new_gear_item_path %>

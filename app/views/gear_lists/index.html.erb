@@ -1,0 +1,27 @@
+<h1>Listing gear_lists</h1>
+
+<table>
+  <tr>
+    <th>Trip</th>
+    <th>Name</th>
+    <th>Intro</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gear_lists.each do |gear_list| %>
+  <tr>
+    <td><%= gear_list.trip_id %></td>
+    <td><%= gear_list.name %></td>
+    <td><%= gear_list.intro %></td>
+    <td><%= link_to 'Show', gear_list %></td>
+    <td><%= link_to 'Edit', edit_gear_list_path(gear_list) %></td>
+    <td><%= link_to 'Destroy', gear_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gear list', new_gear_list_path %>

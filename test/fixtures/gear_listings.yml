@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gear_item_id: 1
+  gear_list_id: 1
+
+two:
+  gear_item_id: 1
+  gear_list_id: 1
