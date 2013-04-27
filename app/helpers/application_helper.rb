@@ -35,4 +35,31 @@ module ApplicationHelper
   def convert_to_kilograms(amount)
     amount / 1000.to_f
   end
+
+  def next_trip
+    next_trip = Trip.first
+    Trip.find_each do |trip|
+      end_date = end_date_to_date(trip)
+      if (end_date - Time.now) > 0 && (end_date - Time.now) < (end_date_to_date(next_trip) - Time.now)
+        next_trip = trip
+      end
+    end
+    return next_trip
+  end
+
+  def last_trip
+    last_trip = Trip.first
+    Trip.find_each do |trip|
+      end_date = end_date_to_date(trip)
+      if (Time.now - end_date) > 0 && (Time.now - end_date) < (Time.now - end_date_to_date(last_trip))
+        last_trip = trip
+      end
+    end
+    return last_trip
+  end
+
+  def end_date_to_date(trip)
+    dated = trip.end_date.split('-').reverse
+    Time.new(dated.first, dated.second, dated.third)
+  end
 end

@@ -36,16 +36,21 @@
         </li>
         <li><%= link_to '<i class="icon-picture icon-white"></i> Pictures'.html_safe, pictures_path %></li>
       </ul>
-      <% if user_signed_in? %>
-        <ul class="nav pull-right">
-          <li class="dropdown">
-            <a class="dropdown-toggle"
-               data-toggle="dropdown"
-               href="#">
-                ME
-                <b class="caret"></b>
-              </a>
-            <ul class="dropdown-menu">
+      <ul class="nav pull-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             href="#">
+              About
+              <b class="caret"></b>
+            </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to '<i class="icon-inbox"></i> Contact'.html_safe, contact_path %></li>
+            <li><%= link_to '<i class="icon-question-sign"></i> About'.html_safe, about_path %></li>
+            <li><%= link_to '<i class="icon-camera"></i> Photography'.html_safe, photography_path %></li>
+            <li><%= link_to '<i class="icon-bullhorn"></i> Web Design'.html_safe, web_design_path %></li>
+            <% if user_signed_in? %>
+              <li class="divider"></li>
               <li><%= link_to "New Trip", new_trip_path %></li>
               <li><%= link_to "New Gear Item", new_gear_item_path %></li>
               <li><%= link_to "New Gear List", new_gear_list_path %></li>
@@ -54,10 +59,10 @@
               <li><%= link_to "New Post", new_post_path %></li>
               <li class="divider"></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: "delete" %></li>
-            </ul>
-          </li>
-        </ul>
-      <% end %>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

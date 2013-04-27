@@ -4,7 +4,55 @@
 <h1 class="picture-h1"><%= @picture.name %></h1>
 
 <div class="well">
-  <p><%= @picture.description %></p>
+  <table class="pic-h-select">
+    <tr>
+      <% @picture.related.each do |pic| %>
+        <td>
+          <div class="outer-img">
+            <% if pic == @picture %>
+
+              <%= image_tag pic.flickr_small_url, alt: pic.name, :'data-toggle' => "tooltip", title: pic.name, class: 'inner-img opacity-me' %>
+
+            <% else %>
+
+              <%= link_to image_tag(pic.flickr_small_url, alt: pic.name, :'data-toggle' => "tooltip", title: pic.name, class: 'inner-img tooltip-me'), picture_path(pic) %>
+
+            <% end %>
+          </div>
+        </td>
+      <% end %>
+    </tr>
+  </table>
+</div>
+
+<table class="img-show-table">
+  <tr>
+    <td>
+      <% if @picture.previous.present? %>
+        <%= link_to image_tag('chevron-left.png', alt: 'Previous Picture', :'data-toggle' => "tooltip", title: 'Previous Picture', class: 'tooltip-me'), picture_path(@picture.previous), class: 'pic-chevron' %>
+      <% else %>
+        <%= image_tag 'chevron-left.png', class: 'opacity-me' %>
+      <% end %>
+    </td>
+
+    <td>
+      <div class="img-show-outer">
+        <%= image_tag @picture.flickr_large_url, alt: @picture.name %>
+        <p class="pic-show-desc"><i><%= @picture.description %></i></p>
+      </div>
+    </td>
+
+    <td>
+      <% if @picture.next.present? %>
+        <%= link_to image_tag('chevron-right.png', alt: 'Next Picture', :'data-toggle' => "tooltip", title: 'Next Picture', class: 'tooltip-me'), picture_path(@picture.next), class: 'pic-chevron' %>
+      <% else %>
+        <%= image_tag 'chevron-right.png', class: 'opacity-me' %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<div class="pic-show-well">
   <% if @picture.gear_item_id.present? || @picture.trip_id.present? || @picture.post_id.present? %>
     <h4>This Picture Belongs To:</h4>
     <ul>
@@ -26,36 +74,6 @@
     </ul>
   <% end %>
 </div>
-
-<table class="img-show-table">
-  <%
-    @next = next_picture(@picture)
-    @previous = previous_picture(@picture)
-   %>
-  <tr>
-    <td>
-      <% if @previous != nil %>
-        <%= link_to image_tag('chevron-left.png', alt: 'Previous Picture', :'data-toggle' => "tooltip", title: 'Previous Picture', class: 'tooltip-me'), picture_path(@previous), class: 'pic-chevron' %>
-      <% else %>
-        <%= image_tag 'chevron-left.png', class: 'opacity-me' %>
-      <% end %>
-    </td>
-
-    <td>
-      <div class="img-show-outer">
-        <%= image_tag @picture.flickr_large_url, alt: @picture.name %>
-      </div>
-    </td>
-
-    <td>
-      <% if @next != nil %>
-        <%= link_to image_tag('chevron-right.png', alt: 'Next Picture', :'data-toggle' => "tooltip", title: 'Next Picture', class: 'tooltip-me'), picture_path(@next), class: 'pic-chevron' %>
-      <% else %>
-        <%= image_tag 'chevron-right.png', class: 'opacity-me' %>
-      <% end %>
-    </td>
-  </tr>
-</table>
 
 <br>
 <%= link_to 'Edit', edit_picture_path(@picture) %>

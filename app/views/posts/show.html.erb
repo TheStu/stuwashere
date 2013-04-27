@@ -6,7 +6,7 @@
 
     <div class="post-meta-well">
       <p>
-        <%= pretty_date(@post.created_at) %> <span class="pink-me">||</span>
+        <%= pretty_date(@post.created_at) %> <span class="pink-me">::</span>
         <%= @post.tags.map { |t|
           "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
          }.join(', ').html_safe %>
@@ -18,6 +18,7 @@
     </div>
 
     <br>
+    <%= link_to 'Edit', edit_post_path(@post) %>
     <br>
 
     <div id="disqus_thread"></div>
@@ -37,8 +38,6 @@
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-    <%= link_to 'Edit', edit_post_path(@post) %>
   </div>
   <div class="span3">
     <%= render 'shared/sidebar' %>

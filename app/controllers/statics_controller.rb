@@ -1,5 +1,6 @@
 class StaticsController < ApplicationController
   def home
+    @posts = Post.page(params[:page]).order('created_at DESC')
   end
 
   def about
@@ -10,5 +11,11 @@ class StaticsController < ApplicationController
 
   def results
     @results = PgSearch.multisearch(params[:q])
+  end
+
+  def web_design
+  end
+
+  def photography
   end
 end

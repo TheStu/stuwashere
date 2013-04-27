@@ -39,7 +39,7 @@
     <div class="span4">
       <h3>Front Picture</h3>
       <div class="field">
-        <% Picture.find_each do |picture| %>
+        <% Picture.order(:created_at).reverse.each do |picture| %>
           <div class="select-outer-img">
             <%= f.label :front_picture_id, image_tag(picture.flickr_small_url, class: 'select-inner-img'), :for => "trip_front_picture_id_#{picture.id}" %>
           </div>

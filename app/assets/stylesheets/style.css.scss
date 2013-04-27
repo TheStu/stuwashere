@@ -38,7 +38,6 @@ $pp: #D9005B;
 
 .bump {
   width: 100%;
-  height: 1px;
   clear: both;
 }
 
@@ -61,8 +60,6 @@ label {
 
 .show-outer-img {
   @extend .outer-img;
-  float: right;
-  margin-top: 10px;
   .show-inner-img {
     @extend .inner-img;
     max-width: 100%;
@@ -93,6 +90,8 @@ label {
 .well {
   font-size: 16px;
   line-height: 24px;
+  border: 1px solid #ccc;
+  background-color: #eee;
   li {
     line-height: 24px;
   }
@@ -117,24 +116,64 @@ label {
   opacity: .3;
 }
 
+.purp-me {
+  color: $pp;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.margin-top-me {
+  margin-top: 10px;
+}
+
+.border-img-v {
+  -moz-border-image:url("stripe-v.png") 0 0 0 8 repeat; /* Old firefox */
+  -webkit-border-image:url("stripe-v.png") 0 0 0 8 repeat; /* Safari */
+  -o-border-image:url("stripe-v.png") 0 0 0 8 repeat; /* Opera */
+  border-image:url("stripe-v.png") 0 0 0 8 repeat;
+}
+
+.border-img-h {
+  -moz-border-image:url("stripe-h.png") 0 0 8 0 repeat; /* Old firefox */
+  -webkit-border-image:url("stripe-h.png") 0 0 8 0 repeat; /* Safari */
+  -o-border-image:url("stripe-h.png") 0 0 8 0 repeat; /* Opera */
+  border-image:url("stripe-h.png") 0 0 8 0 repeat;
+}
+
+.center-me {
+  margin-right: auto;
+  margin-left: auto;
+}
+
           ///////////////////////////////////////////////////////////
           //                                                       //
           //                    APPLICATION WIDE                   //
           //                                                       //
           ///////////////////////////////////////////////////////////
 
-html, body {
-  height: 100%; // for footer
-  /* The html and body elements cannot have any padding or margin. */
-}
-
 /* Wrapper for page content to push down footer */
 #wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
   /* Negative indent footer by it's height */
-  margin: 0 auto -59px;
+  min-height: 100%;
+  height: auto;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('wood_bg.jpg');
+  background-attachment: fixed;
+  #main-container {
+    background: transparent url('transparent_bg.png');
+    padding: 0 25px 25px;
+    height: 100%;
+    width: 970px;
+    #inner-container {
+      background-color: white;
+      padding: 15px;
+    }
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -144,6 +183,9 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 40px;
   color: #FF8500;
+  background-color: white;
+  @include border-radius(5px);
+  margin-top: 0;
 }
 
 input[type="submit"] {
@@ -218,6 +260,10 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   }
 }
 
+.navbar-inverse .navbar-inner {
+  border: #111;
+}
+
           ///////////////////////////////////////////////////////////
           //                                                       //
           //                          SIDEBAR                      //
@@ -225,15 +271,92 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
           ///////////////////////////////////////////////////////////
 
 .sidebar {
+  border-left: 8px solid transparent;
+  @extend .border-img-v;
+  margin-left: -10px;
+  padding-left: 10px;
   .sidebar-section {
-    @extend .well;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    padding: 0 10px 10px 10px;
-    margin-top: 10px;
+    font-size: 15px;
+    line-height: 19px;
+    padding-bottom: 10px;
+    border-bottom: 8px solid transparent;
+    @extend .border-img-h;
     h3 {
-      line-height: 30px;
+      line-height: 24.5px;
     }
+    li {
+      line-height: 20px;
+    }
+  }
+  .next-trip-a {
+    font-size: 18px;
+    font-weight: bold;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .sidebar-dates {
+    font-size: 12px;
+    line-height: 14px;
+    td:first-child {
+      font-weight: bold;
+    }
+  }
+  .sidebar-pic-table {
+    margin: auto;
+    td {
+      padding: 0 14px 14px 0;
+    }
+    td:last-child {
+      padding-right: 0;
+    }
+    tr:last-child td {
+      padding-bottom: 5px;
+    }
+  }
+}
+
+          ///////////////////////////////////////////////////////////
+          //                                                       //
+          //                          HOME                         //
+          //                                                       //
+          ///////////////////////////////////////////////////////////
+
+.homepage-well {
+  @extend .well;
+  margin-top: 0;
+  h3 a:hover {
+    text-decoration: none;
+  }
+  .homepage-last-trip {
+    margin-top: 0;
+    line-height: 25px;
+    &:before {
+      content: 'latest trip :: ';
+      color: $pp;
+    }
+  }
+  .home-last-trip-img {
+    @extend .outer-img;
+    float: right;
+    margin-left: 20px;
+    img {
+      @extend .inner-img;
+      height: 100px;
+    }
+  }
+}
+
+.home-single-post {
+  h3 {
+    line-height: 25px;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+  .home-post-content {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
@@ -349,6 +472,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 .post-meta-well {
   @extend .well;
   padding: 5px;
+  margin-bottom: 5px;
   p {
     margin-bottom: 0;
     font-size: 14px;
@@ -390,6 +514,22 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   td:first-child {
     padding-right: 10px;
   }
+  .pic-show-desc {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #666;
+  }
+}
+
+.pic-show-well {
+  @extend .well;
+  margin: 10px 0 0;
+  h4 {
+    margin-top: 0;
+  }
+  ul {
+    margin-bottom: 0;
+  }
 }
 
 .pic-result {
@@ -397,6 +537,17 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   margin: 0 7px 10px 0;
   img {
     height: 120px;
+  }
+}
+
+#filter-pictures {
+  display: inline-block;
+}
+
+.pic-h-select {
+  @extend .center-me;
+  td {
+    padding: 0 5px;
   }
 }
 
@@ -431,30 +582,3 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   content: 'tag :: ';
   color: $pp;
 }
-
-          ///////////////////////////////////////////////////////////
-          //                                                       //
-          //                          FOOTER                       //
-          //                                                       //
-          ///////////////////////////////////////////////////////////
-
-.navbar-fixed-bottom {
-  position: static;
-  margin-top: 0;
-  .navbar-inner {
-    padding: 5px 20px;
-    .btn-navbar {
-      margin-top: 5px;
-    }
-  }
-  .nav > li > a {
-    margin: 4px 0 4px 10px;
-    @extend .fonted;
-    font-size: 20px;
-  }
-}
-
-#push {
-  height: 100px;
-}
-

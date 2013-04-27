@@ -3,6 +3,8 @@
 
 <h1>Pictures</h1>
 
+<h3 class="inline-block">Sort By:</h3>
+
 <%= form_tag pictures_path, :method => 'get', id: 'filter-pictures' do %>
 
   <%= select_tag( :sort_by,
@@ -11,9 +13,9 @@
                                       ['Date', 'date'],
                                       ],
                   :selected => params[:sort_by]),
-                  :prompt => "Sort By",
+                  :include_blank => true,
                   :onchange => ("$('#filter-pictures').submit()"),
-                  class: 'index-sort-by-form float-right')
+                  class: 'index-sort-by-form')
   %>
 <% end %>
 
@@ -37,7 +39,7 @@
   <%= render partial: 'picture', collection: @pictures %>
 
 <% else %>
-
+  <br>
   <%= render partial: 'picture', collection: @pictures %>
 
 <% end %>

@@ -1,20 +1,62 @@
 <div class="sidebar">
+
   <div class="sidebar-section">
   <h3>Me</h3>
+  <p>Writer, <%= link_to 'photographer', photography_path %>, <%= link_to 'web designer', web_design_path %>, professional adventurer.</p>
   </div>
+
   <div class="sidebar-section">
     <h3>Upcoming Trip</h3>
+    <% @next_trip = next_trip %>
+    <%= link_to @next_trip.name, trip_path(@next_trip), class: 'next-trip-a' %>
+    <table class="sidebar-dates">
+      <tr>
+        <td>
+          Start:
+        </td>
+        <td>
+          <%= pretty_date(@next_trip.start_date) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          End:
+        </td>
+        <td>
+          <%= pretty_date(@next_trip.end_date) %>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <div class="sidebar-section">
     <h3>Latest Gear Reviews</h3>
+    <ul>
+      <% Tag.find_by_name('Gear Review').posts.first(5).each do |post| %>
+        <li>
+          <%= link_to truncate(post.title, length: 22, omission: '...'), post_path(post) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 
-  <div class="sidebar-section">
+  <div>
     <h3>New Pictures</h3>
+    <table class="sidebar-pic-table">
+      <% Picture.order(:created_at).reverse.first(12).in_groups_of(2).each do |group| %>
+        <tr>
+          <% group.each do |pic| %>
+            <td>
+              <% if pic != nil %>
+                <div class="outer-img">
+                  <%= link_to image_tag(pic.flickr_small_url, alt: pic.name, :'data-toggle' => "tooltip", title: pic.name, class: 'inner-img tooltip-me'), picture_path(pic) %>
+                </div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
   </div>
 
-  <div class="sidebar-section">
-    <h3>Latest Comments</h3>
-  </div>
 </div>

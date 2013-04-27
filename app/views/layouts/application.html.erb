@@ -32,17 +32,18 @@
 
 <div id="wrap">
   <%= render "shared/header" %>
-  <div class="container">
-    <%= render 'shared/flash_messages' %>
-    <div class="row">
-      <div class="span12">
-        <%= yield %>
+
+  <div class="container" id="main-container">
+    <div class="container" id="inner-container">
+      <%= render 'shared/flash_messages' %>
+      <div class="row">
+        <div class="span12" id="content-section">
+          <%= yield %>
+        </div>
       </div>
     </div>
   </div>
-  <div id="push"></div>
 </div>
-<%= render 'shared/footer' %>
 <script type="text/javascript">
   (function() {
     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
