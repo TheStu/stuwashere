@@ -12,6 +12,7 @@ class PicturesController < ApplicationController
     elsif @sort_order == 'gear'
       @pictures = Picture.all.group_by(&:gear_item_id)
     end
+    @pictures = @pictures.paginate(:page => params[:page], :per_page => 2)
 
     respond_to do |format|
       format.html # index.html.erb

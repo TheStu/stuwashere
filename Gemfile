@@ -41,6 +41,7 @@ end
   gem "will_paginate", "~> 3.0.4"
   gem "will_paginate-bootstrap", "~> 0.2.2"
   gem "bootstrap-wysihtml5-rails", "~> 0.3.1.19"
+  gem "ckeditor_rails", "~> 4.1.1"
   gem "flickraw", "~> 0.9.6"
   gem "bootstrap-datepicker-rails", "~> 1.0.0.3"
 

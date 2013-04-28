@@ -1,54 +1,63 @@
 <% provide(:title, "#{@gear_list.trip.name} Gear List") %>
 <% provide(:desc, "A comprehensive gear list for #{@gear_list.trip.name}, including gear reviews, pictures and plenty more") %>
 
-<h1><%= @gear_list.trip.name + ' Gear List' %></h1>
-<div class="well">
-  <p><%= @gear_list.intro %></p>
-  <strong>
-    <%= link_to "#{@gear_list.trip.name} Main Page", trip_path(@gear_list.trip) %>
-  </strong>
-</div>
-<% end_total = 0 %>
-<% total_quantity = 0 %>
-<% ['Worn / Carried', 'Other Clothing', 'Carrying', 'Sleeping', 'Shelter', 'Water',
-    'Cooking', 'Toiletries', 'Camera Equipment', 'Lighting', 'Medical',
-    'Misc'].each do |type| %>
-  <% total = 0 %>
-  <h3><%= type %></h3>
-  <table class="gear-list-table">
-    <% @gear_list.gear_listings.where('group_type = ?', type ).each do |listing| %>
-      <tr>
-        <td>
-          <strong><%= listing.quantity %></strong> x <%= link_to listing.gear_item.name, gear_item_path(listing.gear_item) %>
-        </td>
-        <td><%= listing.gear_item.weight * listing.quantity %> grams</td>
-      </tr>
-      <% total += listing.gear_item.weight * listing.quantity %>
-      <% total_quantity += listing.quantity %>
+<div class="row">
+  <div class="span9">
+
+    <h1><%= @gear_list.trip.name + ' Gear List' %></h1>
+    <div class="well">
+      <p><%= @gear_list.intro %></p>
+      <strong>
+        <%= link_to "#{@gear_list.trip.name} Main Page", trip_path(@gear_list.trip) %>
+      </strong>
+    </div>
+    <% end_total = 0 %>
+    <% total_quantity = 0 %>
+    <% ['Worn / Carried', 'Other Clothing', 'Carrying', 'Sleeping', 'Shelter', 'Water',
+        'Cooking', 'Toiletries', 'Camera Equipment', 'Lighting', 'Medical',
+        'Misc'].each do |type| %>
+      <% total = 0 %>
+      <h3><%= type %></h3>
+      <table class="gear-list-table">
+        <% @gear_list.gear_listings.where('group_type = ?', type ).each do |listing| %>
+          <tr>
+            <td>
+              <strong><%= listing.quantity %></strong> x <%= link_to listing.gear_item.name, gear_item_path(listing.gear_item) %>
+            </td>
+            <td><%= listing.gear_item.weight * listing.quantity %> grams</td>
+          </tr>
+          <% total += listing.gear_item.weight * listing.quantity %>
+          <% total_quantity += listing.quantity %>
+        <% end %>
+        <tr>
+          <td><strong>Total:</strong></td>
+          <td><strong>
+            <%= total > 999 ? "#{convert_to_kilograms(total)} kilograms" : "#{total} grams" %>
+          </strong></td>
+          <% end_total += total %>
+        </tr>
+      </table>
     <% end %>
-    <tr>
-      <td><strong>Total:</strong></td>
-      <td><strong>
-        <%= total > 999 ? "#{convert_to_kilograms(total)} kilograms" : "#{total} grams" %>
-      </strong></td>
-      <% end_total += total %>
-    </tr>
-  </table>
-<% end %>
-<br>
-<br>
-<h3>Gear List Totals</h3>
-<table class="gear-list-table">
-  <tr>
-    <td>Total Items Carried</td>
-    <td><strong><%= total_quantity %></strong></td>
-  <tr>
-    <td>Total Weight</td>
-    <td><strong><%= convert_to_kilograms(end_total) %> kilograms</strong></td>
-  </tr>
-</table>
+    <br>
+    <br>
+    <h3>Gear List Totals</h3>
+    <table class="gear-list-table">
+      <tr>
+        <td>Total Items Carried</td>
+        <td><strong><%= total_quantity %></strong></td>
+      <tr>
+        <td>Total Weight</td>
+        <td><strong><%= convert_to_kilograms(end_total) %> kilograms</strong></td>
+      </tr>
+    </table>
+    <%= link_to 'Edit', edit_gear_list_path(@gear_list) %>
+
+  </div>
+  <div class="span3">
+    <%= render 'shared/sidebar' %>
+  </div>
+</div>
 
 
 
-<%= link_to 'Edit', edit_gear_list_path(@gear_list) %>
 

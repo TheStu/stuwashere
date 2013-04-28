@@ -18,4 +18,5 @@
 //= require bootstrap-wysihtml5
 //= require bootstrap-wysihtml5/locales
 //= require bootstrap-datepicker
+//= require ckeditor-jquery
 //= require_tree .

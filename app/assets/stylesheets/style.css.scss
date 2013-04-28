@@ -9,7 +9,8 @@ $oo: #FF8500;
 $pp: #D9005B;
 
 .fonted {
-  font-family: 'Patrick Hand SC', cursive;
+  font-family: 'Josefin Slab', serif;
+  font-weight: 700;
 }
 
 .float-right {
@@ -53,7 +54,13 @@ label {
   padding: 5px;
   border: 1px solid #ccc;
   @include border-radius(4px);
-  .inner-img {
+  -webkit-box-shadow: 0px 1px 5px #ccc;
+  -moz-box-shadow: 0px 1px 5px #ccc;
+  box-shadow: 0px 1px 5px #ccc;
+  &:hover {
+    border: 1px solid #ddd;
+  }
+  .inner-img, img {
     @include border-radius(4px);
   }
 }
@@ -128,13 +135,6 @@ label {
   margin-top: 10px;
 }
 
-.border-img-v {
-  -moz-border-image:url("stripe-v.png") 0 0 0 8 repeat; /* Old firefox */
-  -webkit-border-image:url("stripe-v.png") 0 0 0 8 repeat; /* Safari */
-  -o-border-image:url("stripe-v.png") 0 0 0 8 repeat; /* Opera */
-  border-image:url("stripe-v.png") 0 0 0 8 repeat;
-}
-
 .border-img-h {
   -moz-border-image:url("stripe-h.png") 0 0 8 0 repeat; /* Old firefox */
   -webkit-border-image:url("stripe-h.png") 0 0 8 0 repeat; /* Safari */
@@ -145,6 +145,15 @@ label {
 .center-me {
   margin-right: auto;
   margin-left: auto;
+}
+
+.border-div {
+  height: 8px;
+  background-image: url('stripe-h.png');
+  background-repeat: repeat-x;
+  -webkit-box-shadow: 0px 1px 10px #ccc;
+  -moz-box-shadow: 0px 1px 10px #ccc;
+  box-shadow: 0px 1px 10px #ccc;
 }
 
           ///////////////////////////////////////////////////////////
@@ -181,7 +190,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 30px;
   color: #FF8500;
   background-color: white;
   @include border-radius(5px);
@@ -229,6 +238,10 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   width: 600px;
 }
 
+#post_content {
+  height: 800px;
+}
+
 .field label {
   display: inline-block;
 }
@@ -247,7 +260,13 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   @extend .fonted;
   .brand {
     font-size: 30px;
-    padding: 5px 20px 5px;
+    padding: 5px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    margin: 5px 10px 0 0;
+    &:hover {
+      border: 1px solid #333;
+    }
   }
   ul {
     font-size: 20px;
@@ -258,10 +277,17 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   .navbar-search {
     margin-top: 10px;
   }
+  .container {
+    width: 970px;
+  }
 }
 
 .navbar-inverse .navbar-inner {
   border: #111;
+}
+
+.dropdown-menu > li > a {
+  font-size: 14px;
 }
 
           ///////////////////////////////////////////////////////////
@@ -271,18 +297,13 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
           ///////////////////////////////////////////////////////////
 
 .sidebar {
-  border-left: 8px solid transparent;
-  @extend .border-img-v;
-  margin-left: -10px;
-  padding-left: 10px;
   .sidebar-section {
     font-size: 15px;
     line-height: 19px;
     padding-bottom: 10px;
-    border-bottom: 8px solid transparent;
-    @extend .border-img-h;
     h3 {
       line-height: 24.5px;
+      font-size: 22px;
     }
     li {
       line-height: 20px;
@@ -290,6 +311,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   }
   .next-trip-a {
     font-size: 18px;
+    line-height: 26px;
     font-weight: bold;
     &:hover {
       text-decoration: none;
@@ -298,14 +320,14 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   .sidebar-dates {
     font-size: 12px;
     line-height: 14px;
-    td:first-child {
-      font-weight: bold;
+    i {
+      vertical-align: text-bottom;
     }
   }
   .sidebar-pic-table {
     margin: auto;
     td {
-      padding: 0 14px 14px 0;
+      padding: 0 22px 22px 0;
     }
     td:last-child {
       padding-right: 0;
@@ -313,6 +335,9 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     tr:last-child td {
       padding-bottom: 5px;
     }
+  }
+  .social table {
+    width: 100%;
   }
 }
 
@@ -348,15 +373,12 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 
 .home-single-post {
+  margin-bottom: 50px;
   h3 {
     line-height: 25px;
     a:hover {
       text-decoration: none;
     }
-  }
-  .home-post-content {
-    font-size: 16px;
-    line-height: 24px;
   }
 }
 
@@ -469,25 +491,39 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   }
 }
 
-.post-meta-well {
-  @extend .well;
-  padding: 5px;
-  margin-bottom: 5px;
-  p {
-    margin-bottom: 0;
-    font-size: 14px;
+.post-meta {
+  padding-top: 8px;
+  .meta-date {
     color: #888;
+  }
+  i {
+    vertical-align: text-top;
   }
 }
 
 .post-content {
   font-size: 16px;
   line-height: 24px;
+  padding: 20px;
+  img {
+
+  }
 }
 
-.post-h1:before {
-  content: 'post :: ';
-  color: $pp;
+.post-h1 {
+  margin-bottom: 5px;
+  &:before {
+    content: 'post :: ';
+    color: $pp;
+  }
+}
+
+.post-img {
+  @extend .outer-img;
+  margin: 10px;
+  img {
+    @extend .inner-img;
+  }
 }
 
           ///////////////////////////////////////////////////////////
@@ -513,6 +549,9 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   }
   td:first-child {
     padding-right: 10px;
+  }
+  td:last-child:hover, td:first-child:hover {
+    opacity: .8;
   }
   .pic-show-desc {
     margin: 5px 0 0;

@@ -10,9 +10,8 @@
       %>
       <h3 class="homepage-last-trip">
         <%= link_to @last_trip.name, trip_path(@last_trip) %>
-        <span class="purp-me">(</span>
+        <span class="purp-me">::</span>
         <%= link_to "Gear List", gear_list_path(@last_trip.gear_list) %>
-        <span class="purp-me">)</span>
       </h3>
       <p>
         <span class="home-last-trip-img">
@@ -28,17 +27,19 @@
       <div class="home-single-post">
         <h3><%= link_to post.title, post_path(post) %></h3>
 
-        <div class="post-meta-well">
-          <p>
-            <%= pretty_date(post.created_at) %> <span class="pink-me">::</span>
-            <%= post.tags.map { |t|
-              "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
-             }.join(', ').html_safe %>
-          </p>
-        </div>
+        <div class="border-div"></div>
 
-        <div class="home-post-content">
-          <%= post.content.html_safe %>
+        <p class="post-meta">
+          <i class="icon-calendar"></i>
+          <span class="meta-date"><%= pretty_date(post.created_at) %></span>
+          <i class="icon-tag"></i>
+          <%= post.tags.map { |t|
+            "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
+           }.join(', ').html_safe %>
+        </p>
+
+        <div class="post-content">
+          <%= truncate(post.content, length: 1000, omission: "... #{link_to 'read more', post_path(post)}").html_safe %>
         </div>
       </div>
     <% end %>
