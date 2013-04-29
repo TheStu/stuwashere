@@ -1,3 +1,25 @@
 <% provide(:title, "About") %>
 <% provide(:desc, 'All about Stu Was Here') %>
 
+<div class="row">
+  <div class="span9">
+    <h1>About</h1>
+
+    <p class="static-p">This is my personal blog. It's got a few cool features going on that make it better than the average blog, but it's still just a personal blog.</p>
+
+    <p class="static-p">And speaking of this blog, it was all made by me. If you think this blog fantastic and want me to make you something similar, or something completely different, then <%= link_to 'get in touch', contact_path %> and we can talk.</p>
+
+    <p class="static-p">You've probably also noticed all the amazing photographs on Stu Was Here. All taken by me. I'm self taught -- amazing right?! But if any of the photos look particularly appealing to you, <%= link_to 'contact me', contact_path %> and I'll get you set up with a print.</p>
+
+    <p class="static-p">As for me, I live in BC, Canada and make a living from this blog along with a few other sites. Not having a 9 to 5 job allows me to spend plenty of time in the outdoors doing things like backpacking, skiing, biking and everything else that I enjoy.</p>
+
+    <p class="static-p">A lot of my trips and adventures are documented here on the site, and the ones that I took before this aren't. The main highlight from the before-blog days is the West Coast Trail (twice!). My West Coast Trail trips predate my camera too, so one day I'll have to go a third time and get some pictures. If you're not familiar with the West Coast Trail look it up, it's well worth the trip up here to the Great White North.</p>
+
+    <p class="static-p">Lots of other stuff, not outdoor related, is documented here on the blog too. If I only talked about outdoor related stuff I wouldn't get that many posts in. Making things personal keeps things more interesting.</p>
+
+    <p class="static-p">And that's Stu Was Here.</p>
+  </div>
+  <div class="span3">
+    <%= render 'shared/sidebar' %>
+  </div>
+</div>

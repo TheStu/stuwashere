@@ -1,6 +1,15 @@
 <% provide(:title, "Web Design") %>
 <% provide(:desc, 'Do you like this website? I just so happen to do web design') %>
 
-<h1>Web Design</h1>
+<div class="row">
+  <div class="span9">
 
-<p class="static-p">I make websites, this one being a good example of my work. If you'd like to talk to me about making a website for you, <%= 'get in touch', contact_path %> and we can talk.</p>
+    <h1>Web Design</h1>
+
+    <p class="static-p">I make websites, this one being a good example of my work. If you'd like to talk to me about making a website for you, <%= link_to 'get in touch', contact_path %> and we can talk.</p>
+
+  </div>
+  <div class="span3">
+    <%= render 'shared/sidebar' %>
+  </div>
+</div>

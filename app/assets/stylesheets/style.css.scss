@@ -156,6 +156,16 @@ label {
   box-shadow: 0px 1px 10px #ccc;
 }
 
+.static-p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.pagination {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
           ///////////////////////////////////////////////////////////
           //                                                       //
           //                    APPLICATION WIDE                   //
@@ -504,7 +514,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 .post-content {
   font-size: 16px;
   line-height: 24px;
-  padding: 20px;
+  padding: 5px 20px;
   img {
 
   }

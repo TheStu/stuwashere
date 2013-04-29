@@ -10,10 +10,10 @@ Stuwashere::Application.routes.draw do
   get 'statics/photography', as: 'photography'
   get 'statics/web_design', as: 'web_design', path: 'web-design'
 
-  resources :gear_items, path: 'gear'
-  resources :gear_lists
-  resources :trips
-  resources :tags
-  resources :posts
-  resources :pictures
+  resources :gear_items, path: 'gear', except: :index
+  resources :gear_lists, except: :index
+  resources :trips, except: :index
+  resources :tags, except: :index
+  resources :posts, except: :index
+  resources :pictures, except: :index
 end

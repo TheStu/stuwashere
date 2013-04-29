@@ -44,7 +44,7 @@
       </div>
     <% end %>
 
-    <%= will_paginate @posts %>
+    <%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
   </div>
   <div class="span3">
     <%= render 'shared/sidebar' %>

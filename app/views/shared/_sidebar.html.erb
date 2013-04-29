@@ -26,16 +26,18 @@
 
   <div class="border-div"></div>
 
-  <div class="sidebar-section">
-    <h3>Upcoming Trip</h3>
-    <% @next_trip = next_trip %>
-    <%= link_to @next_trip.name, trip_path(@next_trip), class: 'next-trip-a' %>
-    <p class="sidebar-dates">
-      <%= pretty_date(@next_trip.start_date) %>
-      <i class="icon-arrow-right"></i>
-      <%= pretty_date(@next_trip.end_date) %>
-    </p>
-  </div>
+  <% unless params[:controller] == 'statics' && params[:action] == 'home' %>
+    <div class="sidebar-section">
+      <h3>Latest Trip</h3>
+      <% @last_trip = last_trip %>
+      <%= link_to @last_trip.name, trip_path(@last_trip), class: 'next-trip-a' %>
+      <p class="sidebar-dates">
+        <%= pretty_date(@last_trip.start_date) %>
+        <i class="icon-arrow-right"></i>
+        <%= pretty_date(@last_trip.end_date) %>
+      </p>
+    </div>
+  <% end %>
 
   <div class="border-div"></div>
 
