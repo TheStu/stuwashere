@@ -50,7 +50,12 @@
         <td><strong><%= convert_to_kilograms(end_total) %> kilograms</strong></td>
       </tr>
     </table>
-    <%= link_to 'Edit', edit_gear_list_path(@gear_list) %>
+
+    <% if can? :update, @gear_list %>
+
+      <%= link_to 'Edit', edit_gear_list_path(@gear_list) %>
+
+    <% end %>
 
   </div>
   <div class="span3">

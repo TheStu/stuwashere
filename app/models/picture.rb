@@ -32,4 +32,8 @@ class Picture < ActiveRecord::Base
   def get_flickr
     update_flickr_urls(self) unless flickr_small_url.present?
   end
+
+  def update_flickr
+    update_flickr_urls(self)
+  end
 end

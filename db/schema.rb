@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419210006) do
+ActiveRecord::Schema.define(:version => 20130430213028) do
+
+  create_table "avantlinks", :force => true do |t|
+    t.integer  "gear_item_id"
+    t.string   "merchant_name"
+    t.string   "product_name"
+    t.string   "brand_name"
+    t.string   "sale_price"
+    t.string   "buy_url"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "avantlinks", ["gear_item_id"], :name => "index_avantlinks_on_gear_item_id"
 
   create_table "gear_items", :force => true do |t|
     t.string   "name"

@@ -33,6 +33,18 @@ $pp: #D9005B;
   color: $pp;
 }
 
+.opacity-me {
+  opacity: .3;
+}
+
+.purp-me {
+  color: $pp;
+}
+
+.orange-me {
+  color: $oo;
+}
+
 .bolded {
   font-weight: bold;
 }
@@ -111,20 +123,14 @@ label {
 }
 
 .thumbnail-table {
+  width: 100%;
   td {
-    padding: 10px 10px 0 0;
+    padding: 19px 19px 0 0;
+    width: 87px;
   }
   td:last-child {
     padding-right: 0;
   }
-}
-
-.opacity-me {
-  opacity: .3;
-}
-
-.purp-me {
-  color: $pp;
 }
 
 .inline-block {
@@ -440,6 +446,26 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   color: $pp;
 }
 
+.styled-ul {
+  list-style: none;
+  margin-left: 0;
+  font-weight: bold;
+  li {
+    background-color: #eee;
+    border-radius: 5px;
+    margin-bottom: 7px;
+    a {
+      display: block;
+      padding: 8px;
+      &:hover {
+        background-color: #ddd;
+        @include border-radius(5px);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
           ///////////////////////////////////////////////////////////
           //                                                       //
           //                        GEARLIST                       //
@@ -611,14 +637,24 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   color: $pp;
 }
 
-.result-name {
-  line-height: 30px;
-  margin: 5px 0;
+.result-post-h3:before {
+  content: 'post :: ';
+  color: $pp;
 }
 
-.result-content {
-  font-size: 16px;
-  line-height: 22px;
+.result-gearlist-h3:before {
+  content: 'gear list :: ';
+  color: $pp;
+}
+
+.result-gearitem-h3:before {
+  content: 'gear :: ';
+  color: $pp;
+}
+
+.result-trip-h3:before {
+  content: 'trip :: ';
+  color: $pp;
 }
 
           ///////////////////////////////////////////////////////////

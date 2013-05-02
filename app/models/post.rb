@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
 
   accepts_nested_attributes_for :pictures, :reject_if => lambda { |a| a[:flickr_url].blank? }, :allow_destroy => true
 
+  include GetAvantlink
   include GetFlickr
   include PgSearch
   multisearchable :against => [:content, :title]
@@ -29,12 +30,20 @@ class Post < ActiveRecord::Base
   def tag_count_update
     if self.tags.present?
       self.tags.each do |tag|
-        tag.update_attributes(:tag_count => Tag.where("name = ?", tag.name).count)
+        tag.update_attributes(:tag_count => Tagging.where("tag_id = ?", tag.id).count)
       end
     end
   end
 
   def get_flickr
     self.pictures.each { |a| update_flickr_urls(a) unless a.flickr_small_url.present? }
+  end
+
+  def get_avantlinks
+    if self.gear_item_id.present?
+      if self.gear_item.avantlinks.count == 0 || self.gear_item.avantlinks.first.created_at < Time.now - 1.week
+        update_avantlink(self.gear_item)
+      end
+    end
   end
 end

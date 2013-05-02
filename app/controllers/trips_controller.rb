@@ -14,7 +14,9 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
-    @front_pic = Picture.find(@trip.front_picture_id)
+    if @trip.front_picture_id.present?
+      @front_pic = Picture.find(@trip.front_picture_id)
+    end
 
 
     respond_to do |format|

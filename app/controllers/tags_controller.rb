@@ -14,7 +14,7 @@ class TagsController < ApplicationController
   # GET /tags/1.json
   def show
     @tag = Tag.find(params[:id])
-    @tagged_posts = Post.joins(:tags).where('tags.name = ?', @tag.name)
+    @tagged_posts = Post.joins(:tags).where('tags.name = ?', @tag.name).paginate(:page => params[:page], :per_page => 10).order('created_at DESC')
 
     respond_to do |format|
       format.html # show.html.erb

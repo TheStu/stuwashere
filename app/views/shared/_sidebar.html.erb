@@ -7,7 +7,7 @@
           <%= image_tag 'facebook.png' %>
         </td>
         <td>
-          <%= image_tag 'twitter.png' %>
+          <%= link_to image_tag('twitter.png', alt: 'Stu Was Here on Twitter', :'data-toggle' => "tooltip", title: 'Stu Was Here on Twitter', class: 'tooltip-me'), 'https://twitter.com/stuwashere', target: '_blank' %>
         </td>
         <td>
           <%= link_to image_tag('flickr.png', alt: 'Stu Was Here on Flickr', :'data-toggle' => "tooltip", title: 'Stu Was Here on Flickr', class: 'tooltip-me'), 'http://www.flickr.com/photos/94464817@N03/', target: '_blank' %>
@@ -37,13 +37,14 @@
         <%= pretty_date(@last_trip.end_date) %>
       </p>
     </div>
-  <% end %>
 
-  <div class="border-div"></div>
+    <div class="border-div"></div>
+
+  <% end %>
 
   <div class="sidebar-section">
     <h3>Latest Gear Reviews</h3>
-    <ul>
+    <ul class="styled-ul">
       <% Tag.find_by_name('Gear Review').posts.first(5).each do |post| %>
         <li>
           <%= link_to truncate(post.title, length: 22, omission: '...'), post_path(post) %>

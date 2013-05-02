@@ -1,26 +1,41 @@
 <% provide(:title, @tag.name) %>
-<% provide(:desc, "StuWasHere posts tagged with #{@tag.name}") %>
+<% provide(:desc, "Stu Was Here posts tagged with #{@tag.name}") %>
 <div class="row">
   <div class="span9">
     <h1 class="tag-h1"><%= @tag.name %></h1>
+    <br>
 
     <% @tagged_posts.each do |post| %>
-      <div class="well">
-        <h3 class="result-name">
-          <%= link_to post.title, post_path(post) %>
-        </h3>
-        <div class="result-content">
-          <p>
-            <%= truncate(strip_tags(post.content), :length => 350) %>
-          </p>
+      <div class="home-single-post">
+        <h3><%= link_to post.title, post_path(post) %></h3>
+
+        <div class="border-div"></div>
+
+        <p class="post-meta">
+          <i class="icon-calendar"></i>
+          <span class="meta-date"><%= pretty_date(post.created_at) %></span>
+          <i class="icon-tag"></i>
+          <%= post.tags.map { |t|
+            "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
+           }.join(', ').html_safe %>
+        </p>
+
+        <div class="post-content">
+          <%= truncate(strip_tags(post.content), length: 350, omission: "... #{link_to 'read more', post_path(post)}").html_safe %>
         </div>
       </div>
     <% end %>
+
+    <%= will_paginate @tagged_posts, :renderer => BootstrapPagination::Rails %>
+
   </div>
   <div class="span3">
     <%= render 'shared/sidebar' %>
   </div>
 </div>
 
+<% if can? :update, @tag %>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %>
+  <%= link_to 'Edit', edit_tag_path(@tag) %>
+
+<% end %>

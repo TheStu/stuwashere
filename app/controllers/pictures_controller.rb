@@ -23,6 +23,7 @@ class PicturesController < ApplicationController
   # GET /pictures/1.json
   def show
     @picture = Picture.find(params[:id])
+    @picture.update_flickr if @picture.updated_at < Time.now - 1.day
 
     respond_to do |format|
       format.html # show.html.erb

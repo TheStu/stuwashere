@@ -5,26 +5,46 @@
   <div class="span9">
     <h1 class="results-h1"><%= params[:q] %></h1>
 
+    <br>
+
     <% @results.each do |result| %>
-      <div class="well">
-        <h3 class="result-name">
+      <div class="home-single-post">
+        <h3 class="result-<%= result.searchable.class.name.downcase %>-h3">
           <% if result.searchable.class.name == "Post" %>
             <%= link_to result.searchable.title, result.searchable %>
+          <% elsif result.searchable.class.name == "GearList" %>
+            <%= link_to result.searchable.trip.name, result.searchable %>
           <% else %>
             <%= link_to result.searchable.name, result.searchable %>
           <% end %>
         </h3>
-        <div class="result-content">
-          <p>
-            <% if result.searchable.class.name == "Post" %>
-              <%= truncate(strip_tags(result.searchable.content), :length => 350) %>
-            <% else %>
-              <%= result.searchable.intro %>
-            <% end %>
-          </p>
+
+        <div class="border-div"></div>
+
+        <p class="post-meta">
+          <i class="icon-calendar"></i>
+          <span class="meta-date"><%= pretty_date(result.searchable.created_at) %></span>
+
+          <% if result.searchable.class.name == "Post" %>
+            <i class="icon-tag"></i>
+            <%= result.searchable.tags.map { |t|
+              "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
+             }.join(', ').html_safe %>
+          <% end %>
+        </p>
+
+        <div class="post-content">
+          <% if result.searchable.class.name == "Post" %>
+            <%= truncate(strip_tags(result.searchable.content), length: 350, omission: "... #{link_to 'read more', post_path(result.searchable)}").html_safe %>
+          <% else %>
+            <%= result.searchable.intro %>
+          <% end %>
         </div>
       </div>
     <% end %>
+
+    <%= will_paginate @results, :renderer => BootstrapPagination::Rails %>
+
   </div>
   <div class="span3">
     <%= render 'shared/sidebar' %>

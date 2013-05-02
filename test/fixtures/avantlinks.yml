@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gear_item_id: 1
+  merchant_name: MyString
+  product_name: MyString
+  brand_name: MyString
+  sale_price: MyString
+  buy_url: MyString
+
+two:
+  gear_item_id: 1
+  merchant_name: MyString
+  product_name: MyString
+  brand_name: MyString
+  sale_price: MyString
+  buy_url: MyString

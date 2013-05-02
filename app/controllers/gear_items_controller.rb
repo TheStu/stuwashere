@@ -14,7 +14,10 @@ class GearItemsController < ApplicationController
   # GET /gear_items/1.json
   def show
     @gear_item = GearItem.find(params[:id])
-    @front_pic = Picture.find(@gear_item.front_picture_id)
+    if @gear_item.front_picture_id.present?
+      @front_pic = Picture.find(@gear_item.front_picture_id)
+    end
+    @gear_item.get_avantlinks
 
     respond_to do |format|
       format.html # show.html.erb

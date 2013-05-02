@@ -62,4 +62,15 @@ module ApplicationHelper
     dated = trip.end_date.split('-').reverse
     Time.new(dated.first, dated.second, dated.third)
   end
+
+  def av_name(avantlink)
+    brand_t = avantlink.brand_name.titleize
+    product_t = avantlink.product_name.titleize
+    product_t = product_t.gsub(/[:;?]/,'')
+    if product_t.include? brand_t
+      return product_t
+    else
+      return brand_t + ' ' + product_t
+    end
+  end
 end

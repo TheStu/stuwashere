@@ -76,7 +76,12 @@
 </div>
 
 <br>
-<%= link_to 'Edit', edit_picture_path(@picture) %>
+
+<% if can? :update, @picture %>
+
+  <%= link_to 'Edit', edit_picture_path(@picture) %>
+
+<% end %>
 
 <script type="text/javascript">
   $('.tooltip-me').tooltip()

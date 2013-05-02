@@ -2,42 +2,80 @@
 <% provide(:desc, "Information on the #{@gear_item.name}, including pictures, reviews and trip reports") %>
 
 <div class="row">
-  <div class="span7">
+  <div class="span9">
     <h1 class="gear-item-show-h1"><%= @gear_item.name %></h1>
     <div class="well">
       <%= @gear_item.intro %>
     </div>
-    <h3>Related Posts</h3>
-    <ul class="trip-related-posts">
-      <% @gear_item.posts.each do |post| %>
-        <li><%= link_to post.title, post_path(post) %></li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="span5">
-    <div class="show-outer-img">
-      <%= link_to image_tag(@front_pic.flickr_medium_url, alt: @front_pic.name, class: "show-inner-img"), picture_path(@front_pic) %>
-    </div>
-    <table class="thumbnail-table">
-      <% @gear_item.pictures.in_groups_of(4).each do |group| %>
-        <tr>
-          <% group.each do |pic| %>
-            <td>
-              <% if pic != nil %>
-                <div class="outer-img">
-                  <%= link_to image_tag(pic.flickr_small_url, alt: pic.name, :'data-toggle' => "tooltip", title: pic.name, class: 'inner-img tooltip-me'), picture_path(pic) %>
-                </div>
+    <div class="row">
+      <div class="span4">
+        <% if @gear_item.front_picture_id.present? %>
+          <div class="show-outer-img">
+            <%= link_to image_tag(@front_pic.flickr_medium_url, alt: @front_pic.name, class: "show-inner-img"), picture_path(@front_pic) %>
+          </div>
+        <% else %>
+          <h2>Gear Pictures</h2>
+        <% end %>
+        <table class="thumbnail-table">
+          <% @gear_item.pictures.in_groups_of(3).each do |group| %>
+            <tr>
+              <% group.each do |pic| %>
+                <td>
+                  <% if pic != nil %>
+                    <div class="outer-img">
+                      <%= link_to image_tag(pic.flickr_small_url, alt: pic.name, :'data-toggle' => "tooltip", title: pic.name, class: 'inner-img tooltip-me'), picture_path(pic) %>
+                    </div>
+                  <% end %>
+                </td>
               <% end %>
-            </td>
+            </tr>
           <% end %>
-        </tr>
-      <% end %>
-    </table>
+        </table>
+      </div>
+
+      <div class="span5">
+
+        <h3>Buy It</h3>
+        <ul class="styled-ul">
+          <% @gear_item.avantlinks.each do |link| %>
+            <li>
+              <a href="<%= link.buy_url %>" target="_blank" rel="nofollow" class="tooltip-me" data-toggle="tooltip" title="<%= link.merchant_name %>">
+                <%= truncate(av_name(link), length: 35, omission: '..') %>
+                <span class="float-right orange-me">
+                  <%= link.sale_price %>
+                </span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+
+        <h3>Related Posts</h3>
+        <ul class="styled-ul">
+          <% @gear_item.posts.each do |post| %>
+            <li><%= link_to post.title, post_path(post) %></li>
+          <% end %>
+        </ul>
+
+        <h3>Used On</h3>
+        <ul class="styled-ul">
+          <% @gear_item.gear_lists.each do |list| %>
+            <li><%= link_to list.trip.name, gear_list_path(list) %></li>
+          <% end %>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <div class="span3">
+    <%= render 'shared/sidebar' %>
   </div>
 </div>
 
+<% if can? :update, @gear_item %>
 
-<%= link_to 'Edit', edit_gear_item_path(@gear_item) %>
+  <%= link_to 'Edit', edit_gear_item_path(@gear_item) %>
+
+<% end %>
 
 <script type="text/javascript">
   $('.tooltip-me').tooltip()

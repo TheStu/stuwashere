@@ -10,7 +10,7 @@ class StaticsController < ApplicationController
   end
 
   def results
-    @results = PgSearch.multisearch(params[:q])
+    @results = PgSearch.multisearch(params[:q]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def web_design
