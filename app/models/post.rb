@@ -46,4 +46,18 @@ class Post < ActiveRecord::Base
       end
     end
   end
+
+  def related
+    self.find_by_tags do |posts|
+      posts.sort_by do |p|
+        matched_tags = p.tags.find_all {|t| self.tags.include?(t)}
+        matched_tags.size
+      end.reverse
+    end
+  end
+
+  def find_by_tags
+    tag_ids = self.tags.collect{|a| a.id}
+    Post.includes(:taggings).where(["taggings.tag_id IN (?) AND taggings.post_id != ?", tags, self.id])
+  end
 end

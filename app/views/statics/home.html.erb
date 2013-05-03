@@ -40,6 +40,10 @@
           <%= post.tags.map { |t|
             "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
            }.join(', ').html_safe %>
+          <% if post.gear_item_id.present? %>
+            <i class="icon-star"></i>
+            <%= link_to post.gear_item.name, gear_item_path(post.gear_item) %>
+          <% end %>
         </p>
 
         <div class="post-content">

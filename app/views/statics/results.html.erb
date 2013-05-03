@@ -30,6 +30,10 @@
             <%= result.searchable.tags.map { |t|
               "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
              }.join(', ').html_safe %>
+             <% if result.searchable.gear_item_id.present? %>
+               <i class="icon-star"></i>
+               <%= link_to result.searchable.gear_item.name, gear_item_path(result.searchable.gear_item) %>
+             <% end %>
           <% end %>
         </p>
 

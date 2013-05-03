@@ -13,20 +13,63 @@
       <%= @post.tags.map { |t|
         "<a href=\"#{tag_path(t)}\">#{t.name}</a>"
        }.join(', ').html_safe %>
+      <% if @post.gear_item_id.present? %>
+        <i class="icon-star"></i>
+        <%= link_to @post.gear_item.name, gear_item_path(@post.gear_item) %>
+      <% end %>
     </p>
 
     <div class="post-content">
       <%= @post.content.html_safe %>
+      <% if can? :update, @post %>
+        <%= link_to 'Edit', edit_post_path(@post) %>
+      <% end %>
     </div>
 
-    <br>
+    <% if @post.gear_item_id.present? %>
+      <div class="well">
+        <strong>Find out more about the <%= link_to @post.gear_item.name, gear_item_path(@post.gear_item) %></strong>
+      </div>
+    <% end %>
 
-    <% if can? :update, @post %>
+    <% if @post.gear_item_id.present? && @post.gear_item.avantlinks.present? %>
+      <div class="float-left">
+        <h3 class="h3-margin post-split post-split-margin">Buy It</h3>
+        <ul class="styled-ul post-split post-split-margin">
+          <% @post.gear_item.avantlinks.each do |link| %>
+            <li>
+              <a href="<%= link.buy_url %>" target="_blank" rel="nofollow" class="tooltip-me" data-toggle="tooltip" title="<%= link.merchant_name %>">
+                <%= truncate(av_name(link), length: 30, omission: '..') %>
+                <span class="float-right orange-me">
+                  <%= link.sale_price %>
+                </span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
 
-      <%= link_to 'Edit', edit_post_path(@post) %>
+      <div class="float-left">
+        <h3 class="h3-margin post-split">Related Posts</h3>
+        <ul class="styled-ul post-split">
+          <% @post.related.each do |post| %>
+            <li><%= link_to post.title, post_path(post) %></li>
+          <% end %>
+        </ul>
+      </div>
+
+    <% else %>
+
+      <h3 class="h3-margin">Related Posts</h3>
+      <ul class="styled-ul">
+        <% @post.related.each do |post| %>
+          <li><%= link_to post.title, post_path(post) %></li>
+        <% end %>
+      </ul>
 
     <% end %>
 
+    <br>
     <br>
 
     <div id="disqus_thread"></div>
@@ -51,3 +94,7 @@
     <%= render 'shared/sidebar' %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('.tooltip-me').tooltip()
+</script>
