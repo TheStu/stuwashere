@@ -10,6 +10,7 @@
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
   <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:700' rel='stylesheet' type='text/css'>
+  <%= auto_discovery_link_tag(:atom, posts_url(format: 'atom')) %>
 </head>
 <body>
 

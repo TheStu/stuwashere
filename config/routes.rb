@@ -14,6 +14,6 @@ Stuwashere::Application.routes.draw do
   resources :gear_lists, except: :index
   resources :trips, except: :index
   resources :tags, except: :index
-  resources :posts, except: :index
+  resources :posts
   resources :pictures, except: :index
 end

@@ -36,7 +36,6 @@ end
   gem "cancan", "~> 1.6.9"
   gem "foreman", "~> 0.60.2"
   gem "rails_admin", "~> 0.4.6"
-  gem 'jquery-raty-rails', '~> 0.0.1', github: 'TheStu/jquery-raty-rails'
   gem "pg_search", "~> 0.6.1"
   gem "will_paginate", "~> 3.0.4"
   gem "will_paginate-bootstrap", "~> 0.2.2"

@@ -1,5 +1,6 @@
 class GearItem < ActiveRecord::Base
-  attr_accessible :name, :post_id, :weight, :intro, :front_picture_id
+  attr_accessible :name, :post_id, :weight, :intro, :front_picture_id,
+  :searchable
 
   has_many :retailers
   has_many :gear_listings
@@ -17,8 +18,10 @@ class GearItem < ActiveRecord::Base
   end
 
   def get_avantlinks
-    if self.avantlinks.count == 0 || self.avantlinks.first.created_at < Time.now - 1.week
-      update_avantlink(self)
+    if self.searchable == true
+      if self.avantlinks.count == 0 || self.avantlinks.first.created_at < Time.now - 1.week
+        update_avantlink(self)
+      end
     end
   end
 end

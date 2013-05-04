@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   attr_accessible :content, :title, :trip_id, :tag_ids, :gear_item_id,
-  :pictures_attributes
+  :pictures_attributes, :impression_count
 
   has_many :tags, through: :taggings
   has_many :taggings
@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
   end
 
   def get_avantlinks
-    if self.gear_item_id.present?
+    if self.gear_item_id.present? && self.gear_item.searchable == true
       if self.gear_item.avantlinks.count == 0 || self.gear_item.avantlinks.first.created_at < Time.now - 1.week
         update_avantlink(self.gear_item)
       end

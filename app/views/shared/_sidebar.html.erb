@@ -13,7 +13,7 @@
           <%= link_to image_tag('flickr.png', alt: 'Stu Was Here on Flickr', :'data-toggle' => "tooltip", title: 'Stu Was Here on Flickr', class: 'tooltip-me'), 'http://www.flickr.com/photos/94464817@N03/', target: '_blank' %>
         </td>
         <td>
-          <%= image_tag 'rss.png' %>
+          <%= link_to image_tag('rss.png', alt: 'Stu Was Here Atom Feed', :'data-toggle' => "tooltip", title: 'Stu Was Here Atom Feed', class: 'tooltip-me'), posts_url(format: 'atom')  %>
         </td>
       </tr>
     </table>
@@ -26,21 +26,17 @@
 
   <div class="border-div"></div>
 
-  <% unless params[:controller] == 'statics' && params[:action] == 'home' %>
-    <div class="sidebar-section">
-      <h3>Latest Trip</h3>
-      <% @last_trip = last_trip %>
-      <%= link_to @last_trip.name, trip_path(@last_trip), class: 'next-trip-a' %>
-      <p class="sidebar-dates">
-        <%= pretty_date(@last_trip.start_date) %>
-        <i class="icon-arrow-right"></i>
-        <%= pretty_date(@last_trip.end_date) %>
-      </p>
-    </div>
+  <div class="sidebar-section">
+    <h3>Popular Posts</h3>
+    <ul class="styled-ul">
+      <% Post.order('impression_count DESC').first(5).each do |post| %>
+        <li><%= link_to truncate(post.title, length: 22, omission: '...'), post_path(post) %></li>
+      <% end %>
+    </ul>
+  </div>
 
-    <div class="border-div"></div>
+  <div class="border-div"></div>
 
-  <% end %>
 
   <div class="sidebar-section">
     <h3>Latest Gear Reviews</h3>

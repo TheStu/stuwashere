@@ -1,12 +1,15 @@
 class PostsController < ApplicationController
+  include PostCount
+
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
+      #format.html # index.html.erb
+      #format.json { render json: @posts }
+      format.atom
     end
   end
 
@@ -15,6 +18,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post.get_avantlinks
+    impression_count(@post)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -86,6 +90,14 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def impression_count(post)
+    unless bot?(request.user_agent)
+      post.update_attributes(impression_count: post.impression_count + 1)
     end
   end
 end

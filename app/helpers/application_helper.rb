@@ -4,7 +4,7 @@ module ApplicationHelper
     if page_title.empty?
       base_title
     elsif page_title == "home"
-      "#{base_title} | Part Time Adventurer"
+      "#{base_title} | Live Vicariously Through Me"
     else
       "#{page_title} | #{base_title}"
     end

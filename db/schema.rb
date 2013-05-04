@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430213028) do
+ActiveRecord::Schema.define(:version => 20130503205542) do
 
   create_table "avantlinks", :force => true do |t|
     t.integer  "gear_item_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130430213028) do
     t.string   "buy_url"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.boolean  "permanent"
   end
 
   add_index "avantlinks", ["gear_item_id"], :name => "index_avantlinks_on_gear_item_id"
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130430213028) do
     t.datetime "updated_at",       :null => false
     t.text     "intro"
     t.integer  "front_picture_id"
+    t.boolean  "searchable"
   end
 
   create_table "gear_listings", :force => true do |t|
@@ -85,9 +87,10 @@ ActiveRecord::Schema.define(:version => 20130430213028) do
     t.integer  "trip_id"
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "gear_item_id"
+    t.integer  "impression_count", :default => 0
   end
 
   create_table "rails_admin_histories", :force => true do |t|

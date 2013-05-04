@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.raty
 //= require bootstrap
 //= require bootstrap-button
 //= require bootstrap-wysihtml5
