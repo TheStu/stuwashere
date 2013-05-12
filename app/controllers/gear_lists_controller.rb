@@ -1,4 +1,6 @@
 class GearListsController < ApplicationController
+  authorize_resource
+
   # GET /gear_lists
   # GET /gear_lists.json
   def index
@@ -78,7 +80,7 @@ class GearListsController < ApplicationController
     @gear_list.destroy
 
     respond_to do |format|
-      format.html { redirect_to gear_lists_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

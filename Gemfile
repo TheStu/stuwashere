@@ -8,6 +8,11 @@ gem 'rails', '3.2.13'
 group :development, :test do
   gem 'sqlite3'
   gem "meta_request", "~> 0.2.3"
+  gem "rspec-rails", "~> 2.13.1"
+  gem "capybara", "~> 2.1.0"
+  gem "factory_girl_rails", "~> 4.2.1"
+  gem "spork", "~> 0.9.2"
+  gem "database_cleaner", "~> 0.9.1"
 end
 
 

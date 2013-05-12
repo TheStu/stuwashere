@@ -1,4 +1,6 @@
 class TripsController < ApplicationController
+  authorize_resource
+
   # GET /trips
   # GET /trips.json
   def index
@@ -80,7 +82,7 @@ class TripsController < ApplicationController
     @trip.destroy
 
     respond_to do |format|
-      format.html { redirect_to trips_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

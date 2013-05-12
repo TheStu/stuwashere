@@ -80,7 +80,7 @@ config.action_mailer.smtp_settings = {
   :enable_starttls_auto => true  }
 
   # Google Analytics Gem --- replace this with your tracker code
-  GA.tracker = "UA-838194-18"
+  GA.tracker = "UA-838194-23"
 
   # Exception Notification email settings
   config.middleware.use ExceptionNotifier,

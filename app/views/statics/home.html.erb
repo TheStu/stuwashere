@@ -3,29 +3,33 @@
 
 <div class="row">
   <div class="span9">
-    <div class="homepage-well">
+    <% @last_trip = last_trip %>
+    <% if @last_trip.present? %>
       <%
-        @last_trip = last_trip
         if @last_trip.front_picture_id.present?
           @front_pic = Picture.find(@last_trip.front_picture_id)
         end
       %>
-      <h3 class="homepage-last-trip">
-        <%= link_to @last_trip.name, trip_path(@last_trip) %>
-        <span class="purp-me">::</span>
-        <%= link_to "Gear List", gear_list_path(@last_trip.gear_list) %>
-      </h3>
-      <p>
-        <% if @last_trip.front_picture_id.present? %>
-          <span class="home-last-trip-img">
-            <%= link_to image_tag(@front_pic.flickr_medium_url, alt: @front_pic.name), picture_path(@front_pic) %>
-          </span>
-        <% end %>
-        <%= truncate(@last_trip.intro, length: 250, omission: '...') %>
-        <br>
-      </p>
-      <div class="bump"></div>
-    </div>
+      <div class="homepage-well">
+        <h3 class="homepage-last-trip">
+          <%= link_to @last_trip.name, trip_path(@last_trip) %>
+          <% if @last_trip.gear_list.present? %>
+            <span class="purp-me">::</span>
+            <%= link_to "Gear List", gear_list_path(@last_trip.gear_list) %>
+          <% end %>
+        </h3>
+        <p>
+          <% if @last_trip.front_picture_id.present? %>
+            <span class="home-last-trip-img">
+              <%= link_to image_tag(@front_pic.flickr_medium_url, alt: @front_pic.name), picture_path(@front_pic) %>
+            </span>
+          <% end %>
+          <%= truncate(@last_trip.intro, length: 250, omission: '...') %>
+          <br>
+        </p>
+        <div class="bump"></div>
+      </div>
+    <% end %>
 
     <% @posts.each do |post| %>
       <div class="home-single-post">

@@ -2,6 +2,27 @@
 <% provide(:desc, truncate(strip_tags(@post.content), :length => 180)) %>
 <div class="row">
   <div class="span9">
+
+    <div class="social-arrow">
+      <%= image_tag("chevron-right.png", alt: 'show share buttons', title: 'show share buttons', class: 'social-arrow-img')  %>
+    </div>
+
+    <div class="social-bar">
+      <div class="social-button">
+        <div class="fb-like" data-href="<%= post_url(@post) %>" data-send="false" data-layout="box_count" data-width="55" data-show-faces="false"></div>
+      </div>
+      <div class="social-button">
+        <su:badge layout="5" location="<%= post_url(@post) %>"></su:badge>
+      </div>
+      <div class="social-button">
+        <div class="g-plusone" data-size="tall" data-href="<%= post_url(@post) %>"></div>
+      </div>
+      <div class="social-button">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= post_url(@post) %>" data-via="stuwashere" data-count="vertical">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </div>
+    </div>
+
     <h1 class="post-h1"><%= @post.title %></h1>
 
     <div class="border-div"></div>
@@ -23,6 +44,7 @@
       <%= @post.content.html_safe %>
       <% if can? :update, @post %>
         <%= link_to 'Edit', edit_post_path(@post) %>
+        <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </div>
 

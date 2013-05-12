@@ -4,6 +4,7 @@ class GearList < ActiveRecord::Base
 
   belongs_to :trip
   has_many :gear_listings
+  has_many :gear_items, through: :gear_listings
 
   accepts_nested_attributes_for :gear_listings, :reject_if => lambda { |a| a[:quantity].blank? || a[:quantity] == 0 }, :allow_destroy => true
 

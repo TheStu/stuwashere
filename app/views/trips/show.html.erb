@@ -11,9 +11,11 @@
         <%= pretty_date(@trip.end_date) %>
       </strong></p>
       <p><%= @trip.intro %></p>
-      <strong>
-        <%= link_to "#{@trip.name} Gear List", gear_list_path(@trip.gear_list) %>
-      </strong>
+      <% if @trip.gear_list.present? %>
+        <strong>
+          <%= link_to "#{@trip.name} Gear List", gear_list_path(@trip.gear_list) %>
+        </strong>
+      <% end %>
     </div>
 
     <div class="row">
@@ -61,6 +63,7 @@
 <% if can? :update, @trip %>
 
   <%= link_to 'Edit', edit_trip_path(@trip) %>
+  <%= link_to 'Destroy', @trip, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <% end %>
 

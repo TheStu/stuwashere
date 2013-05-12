@@ -34,34 +34,39 @@
       </div>
 
       <div class="span5">
+        <% if @gear_item.avantlinks.present? %>
+          <h3>Buy It</h3>
+          <ul class="styled-ul">
+            <% @gear_item.avantlinks.each do |link| %>
+              <li>
+                <a href="<%= link.buy_url %>" target="_blank" rel="nofollow" class="tooltip-me" data-toggle="tooltip" title="<%= link.merchant_name %>">
+                  <%= truncate(av_name(link), length: 35, omission: '..') %>
+                  <span class="float-right orange-me">
+                    <%= link.sale_price %>
+                  </span>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
 
-        <h3>Buy It</h3>
-        <ul class="styled-ul">
-          <% @gear_item.avantlinks.each do |link| %>
-            <li>
-              <a href="<%= link.buy_url %>" target="_blank" rel="nofollow" class="tooltip-me" data-toggle="tooltip" title="<%= link.merchant_name %>">
-                <%= truncate(av_name(link), length: 35, omission: '..') %>
-                <span class="float-right orange-me">
-                  <%= link.sale_price %>
-                </span>
-              </a>
-            </li>
-          <% end %>
-        </ul>
+        <% if @gear_item.posts.present? %>
+          <h3>Related Posts</h3>
+          <ul class="styled-ul">
+            <% @gear_item.posts.each do |post| %>
+              <li><%= link_to post.title, post_path(post) %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
-        <h3>Related Posts</h3>
-        <ul class="styled-ul">
-          <% @gear_item.posts.each do |post| %>
-            <li><%= link_to post.title, post_path(post) %></li>
-          <% end %>
-        </ul>
-
-        <h3>Used On</h3>
-        <ul class="styled-ul">
-          <% @gear_item.gear_lists.each do |list| %>
-            <li><%= link_to list.trip.name, gear_list_path(list) %></li>
-          <% end %>
-        </ul>
+        <% if @gear_item.gear_lists.present? %>
+          <h3>Used On</h3>
+          <ul class="styled-ul">
+            <% @gear_item.gear_lists.each do |list| %>
+              <li><%= link_to list.trip.name, gear_list_path(list) %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
       </div>
     </div>
@@ -74,6 +79,7 @@
 <% if can? :update, @gear_item %>
 
   <%= link_to 'Edit', edit_gear_item_path(@gear_item) %>
+  <%= link_to 'Destroy', @gear_item, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <% end %>
 

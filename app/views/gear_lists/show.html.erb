@@ -54,6 +54,7 @@
     <% if can? :update, @gear_list %>
 
       <%= link_to 'Edit', edit_gear_list_path(@gear_list) %>
+      <%= link_to 'Destroy', @gear_list, method: :delete, data: { confirm: 'Are you sure?' } %>
 
     <% end %>
 

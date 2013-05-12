@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  authorize_resource
+
   # GET /tags
   # GET /tags.json
   def index
@@ -77,7 +79,7 @@ class TagsController < ApplicationController
     @tag.destroy
 
     respond_to do |format|
-      format.html { redirect_to tags_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

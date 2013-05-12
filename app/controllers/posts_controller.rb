@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  authorize_resource
+
   include PostCount
 
   # GET /posts
@@ -88,7 +90,7 @@ class PostsController < ApplicationController
     @post.destroy
     @post.tag_count_update
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end
