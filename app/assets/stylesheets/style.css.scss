@@ -64,13 +64,10 @@ label {
 
 .outer-img {
   padding: 5px;
-  border: 1px solid #ccc;
   @include border-radius(4px);
-  -webkit-box-shadow: 0px 1px 5px #ccc;
-  -moz-box-shadow: 0px 1px 5px #ccc;
-  box-shadow: 0px 1px 5px #ccc;
+  background-color: #ddd;
   &:hover {
-    border: 1px solid #ddd;
+    background-color: #eee;
   }
   .inner-img, img {
     @include border-radius(4px);
@@ -125,7 +122,7 @@ label {
 .thumbnail-table {
   width: 100%;
   td {
-    padding: 19px 19px 0 0;
+    padding: 21px 21px 0 0;
     width: 87px;
   }
   td:last-child {
@@ -455,14 +452,14 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
   margin-left: 0;
   font-weight: bold;
   li {
-    background-color: #eee;
+    background-color: #ddd;
     border-radius: 5px;
     margin-bottom: 7px;
     a {
       display: block;
       padding: 8px;
       &:hover {
-        background-color: #ddd;
+        background-color: #eee;
         @include border-radius(5px);
         text-decoration: none;
       }

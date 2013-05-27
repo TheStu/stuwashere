@@ -9,7 +9,7 @@ module GetAvantlink
     results = Nokogiri::XML(open(url))
     my_hash = results.search('//Table1').map{ |e| Hash.from_xml(e.to_xml)['Table1'] }
 
-    old_avantlinks = Avantlink.where("gear_item_id = ? AND permanent = ?", gear_item.id, false)
+    Avantlink.where("gear_item_id = ? AND permanent = ?", gear_item.id, false).delete_all
 
     my_hash.each do |result|
       av = Avantlink.new(
@@ -21,7 +21,5 @@ module GetAvantlink
         buy_url: result['Buy_URL'])
       av.save
     end
-
-    old_avantlinks.destroy
   end
 end
